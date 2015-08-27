@@ -63,7 +63,13 @@ def tsnePlot(word, model):
  
 
 
+
+def vocab(model):
+    vocab = []
+    for key, value in model.vocab.iteritems():
+        vocab.append(key)
     
+    return vocab        
     
 
 def main():
