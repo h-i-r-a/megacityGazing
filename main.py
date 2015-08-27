@@ -68,6 +68,7 @@ def vocab(model):
     vocab = []
     for key, value in model.vocab.iteritems():
         vocab.append(key)
+        print key + '\n' + model[key]
     
     return vocab        
     
