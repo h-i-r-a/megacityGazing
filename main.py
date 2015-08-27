@@ -7,6 +7,7 @@ import logging
 import time
 import seaborn as sb
 from sklearn.manifold import TSNE
+import numpy as np
 
 
 class Corpus(object):
