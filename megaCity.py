@@ -204,12 +204,6 @@ def main(arguments):
         
 
 
-
-
-
-
-
-
 if __name__ == '__main__':
 
     arguments = docopt(__doc__, version='megaCityGazing 1.0')
