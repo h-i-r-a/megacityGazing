@@ -9,12 +9,14 @@ Usage:
   megaCity.py word2vec DIRECTORY [-u MODEL] [-v]
   megaCity.py word2vec DIRECTORY [-o OUTPUTMODEL] [-v]
   megaCity.py tsneplot <model> <word> [-s <dest> <plotname>] [-v]
+  megaCity.py wordVectorsList <inputmodel>
 
 Arguments:
   <dest>                  destination folder for the tsne plot  
   <plotname>              name of the tsne plot to be saved
   <model>                 model to be used for creating a plot
   <word>                  word whose most similar words are to be plotted
+  <inputmodel>            input model for displaying all word vectors
 
 Options:
   -h --help               Show this screen.
@@ -102,6 +104,26 @@ def updateWord2Vec(dir, modelName, verbose):
     loaded_model.train(more_sentences)
     loaded_model.save(modelName)
 
+def wordVectorsList (modelName):
+
+    """dumps all the word vectors on the screen; 
+    these can be piped into a txt file via python megaCity.py wordVectorsList impgaze > file.txt
+    """
+    model = word2vec.Word2Vec.load(modelName)
+
+    vocab = []
+    for key, value in model.vocab.iteritems():
+        vocab.append(key)
+        
+    sorted(vocab)
+
+    # if verbose:
+    #     "Printing all the word vectors inside the model " + modelName + "\n"
+
+    for word in sorted(vocab):
+        print "\n" + word + "\n" 
+        print model[word]
+
 def tsnePlot(plotname, modelName, word, dest):
     
     """Plots a tsne graph of words most similar to the word passed in the argument (as represented in the model previously calculated)"""
@@ -143,7 +165,6 @@ def main(arguments):
 
         dir = arguments['DIRECTORY']
         verbose = arguments['-v']
-
         runWord2Vec(dir, modelName, verbose)
 
 
@@ -175,10 +196,21 @@ def main(arguments):
         if verbose:
             print "Plot " + plotname + " has been saved inside the folder " + dest 
 
+    if arguments['wordVectorsList'] and arguments['<inputmodel>']:
+        
+        modelName = arguments['<inputmodel>']
+        wordVectorsList(modelName, verbose)
+
+        
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
 
     arguments = docopt(__doc__, version='megaCityGazing 1.0')
     main (arguments)
-    
