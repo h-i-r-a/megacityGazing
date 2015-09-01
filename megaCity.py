@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 megaCity.py
@@ -201,8 +200,7 @@ def main(arguments):
         modelName = arguments['<inputmodel>']
         wordVectorsList(modelName, verbose)
 
-        
-
+      
 
 if __name__ == '__main__':
 
